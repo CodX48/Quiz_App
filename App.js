@@ -7,35 +7,36 @@ import {page1,page2,page3} from "./selectList.js";
 
 // the information about the q
 let Q ={
-    amount:0,
+    amount:5,
     category:'any',
     difficulty:"easy",
     type:"multiple"
 }
 
-document.querySelectorAll('button').forEach(ele => 
-    ele.addEventListener('click',()=>{
-    if(ele.getAttribute('key') === 'start'){
-        setTimeout(async ()=>{
-            let data = await getQ();
-            console.log(data);
-        } ,2000);
-
-    }
-}))
 async function getQ() {
-    const response = await fetch(`https://opentdb.com/api.php?amount=5&category=${Q.category}&difficulty=${Q.difficulty}&type=${Q.type}`);
+    const response = await fetch(`https://opentdb.com/api.php?amount=${Q.amount}&category=${Q.category}&difficulty=${Q.difficulty}&type=${Q.type}`);
     const data = await response.json();
     return data;
 }
 
 let sec = 0;
+let data;
 const buttons = document.querySelectorAll('button');
 
 buttons.forEach(button => {
   button.addEventListener('click', event => {
-    sec = sec === 2 ? 2 : (sec + 1) % 3;
+    if(button.getAttribute('key') == 'start'){
+        setTimeout(async ()=>{
+            data = await getQ();
+            loadQ(data)
+        } ,1000);
+
+        
+    }else{
+    sec = (sec + 1);
     updateCarousel(sec);
+    }
+    
     event.preventDefault();
   });
 });
@@ -101,5 +102,44 @@ function handelQtype(){
 }
 handelQtype();
 
+//he gonna take the arr and go over it till the end of it, our goal is to every time i click next i need to increment the index by 1 so every time the index is been changed, it is for changing the data 
+// there is also a event listener to know the choosen and compare it to the correct answer so we calc the exam result 
+let Q_incrementer = 0;
 
+function loadQ(Data) {
+    if (Data.response_code == '0' && Array.isArray(Data.results)) {
+        questionsHandel(Q_incrementer, Data);
+    } else {
+        console.log("No data or invalid format");
+    }
+}
 
+function renderQuizSection(Question) {
+    let answersHTML = `<p>${Question.correct_answer}</p>`;
+    Question.incorrect_answers.forEach((ele) => {
+        answersHTML += `<p>${ele}</p>`;
+    });
+
+    return `
+    <div class="Q-section">
+        <h2 class="main-Q">${Question.question}</h2>
+        <div class="Answers-sec">${answersHTML}</div>
+        <button class="quiz-btn" ${Q_incrementer === Q.amount - 1 ? 'key="lastQ"' : 'key="nextQ"'}>Next</button>
+    </div>`;
+}
+
+function questionsHandel(index, Data) {
+    document.querySelector(".selection-list").innerHTML = renderQuizSection(Data.results[index]);
+}
+
+document.querySelector(".selection-list").addEventListener('click', (event) => {
+    if (event.target.getAttribute('key') === 'nextQ') {
+        if (Q_incrementer < data.results.length - 1) {
+            Q_incrementer++;
+            loadQ(data);
+        }
+
+    } else if (event.target.getAttribute('key') === 'lastQ') {
+        console.log("End of quiz!");
+    }
+});

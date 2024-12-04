@@ -11,6 +11,14 @@ body{
     background-color: #1d1724;
 }
 
+.main-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
 
 .selection-list{
     display: flex;
@@ -20,7 +28,7 @@ body{
     margin: auto;
     overflow: hidden;
     background-color: #e8e8e8;
-    transform: translateY(25%);
+    transform: translateY(30%);
     border-radius: 20px;
     height: fit-content;
 }
@@ -151,4 +159,59 @@ transition: 0.5s ease-in-out;
     border-radius: 10px;
     border: none;
     outline: none;
+}
+
+.Q-section{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+    padding: 100px;
+    width: 100%;
+}
+.main-Q{
+    width: 100%;
+}
+.Answers-sec{
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+}
+.Answers-sec p{
+    font-size: 20px;
+    font-weight: 600;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    color: #1d1724;
+    border: 2px #9B7EBD solid;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.quiz-btn{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border: 2px #9B7EBD solid;
+    border-radius: 10px;
+    background-color: #00000000;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.Answers-sec p:hover,.quiz-btn:hover{
+    background-color: #9B7EBD;
+    color: #e8e8e8;
+}
+
+.Answers-sec p:focus{
+    background-color: #9B7EBD;
+    color: #e8e8e8;
 }
