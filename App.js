@@ -16,7 +16,7 @@ let Q ={
 
 let userInfo = {
     name:"",
-    user_ans: []
+    user_ans: {}
     ,score: 0
 }
 
@@ -25,9 +25,11 @@ async function getQ() {
     const data = await response.json();
     return data;
 }
+
 let exam_ans = []
 let sec = 0;
 let data;
+
 function handelANS(){ 
     let  x  = 0;
     data.results.forEach(ele=>{
@@ -39,12 +41,6 @@ function handelANS(){
     })
 }
 
-function handelUserANS(Ans){
-    userInfo.user_ans.push({
-        selectedANS:Ans
-    })
-
-}
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach(button => {
@@ -53,7 +49,6 @@ buttons.forEach(button => {
         setTimeout(async ()=>{
             data = await getQ();
             handelANS();
-            //console.log(exam_ans)
             loadQ(data)
             //console.log(data.results);
         } ,1000);
@@ -85,7 +80,6 @@ function handelcategory() {
             const categoryKey = ele.getAttribute('key');
             if (categoryKey) {
                 Q = { ...Q, category: categoryKey }; 
-                 //console.log(Q); 
             }
             event.preventDefault(); // Prevent default behavior (e.g., navigating)
         });
@@ -103,7 +97,6 @@ document.querySelectorAll('.Q-diff-cont p').forEach(ele =>{
         const DiffKey = ele.getAttribute('key');
         if (DiffKey) {
             Q = { ...Q, difficulty: DiffKey }; 
-             //console.log(Q); 
              event.preventDefault();
         }
     })
@@ -121,7 +114,6 @@ function handelQtype(){
         const typeKey = ele.getAttribute('key');
         if (typeKey) {
             Q = { ...Q, type: typeKey }; 
-             //console.log(Q); 
              event.preventDefault();
         }
         })
@@ -133,10 +125,14 @@ handelQtype();
 // there is also a event listener to know the choosen and compare it to the correct answer so we calc the exam result 
 let Q_incrementer = 0;
 
+function handelUserANS(Ans){
+    userInfo.user_ans = {...userInfo.user_ans,[Q_incrementer]:Ans}
+}
+
 function loadQ(Data) {
     if (Data.response_code == '0' && Array.isArray(Data.results)) {
         questionsHandel(Q_incrementer, Data);
-        //console.log(Data)
+        
     } else {
         console.log("No data or invalid format");
     }
@@ -145,7 +141,7 @@ function loadQ(Data) {
 function renderQuizSection(Question) {
     let answersHTML = `<p id="Quiz_Ans">${Question.correct_answer}</p>`;
     Question.incorrect_answers.forEach((ele) => {
-        answersHTML += `<p id="Quiz_Ans">${ele}</p>`;
+        answersHTML += `<p id="Quiz_Ans" key="">${ele}</p>`;
     });
 
     return `
@@ -160,13 +156,11 @@ function questionsHandel(index, Data) {
     document.querySelector(".selection-list").innerHTML = renderQuizSection(Data.results[index]);
     
 }
-
 document.querySelector(".selection-list").addEventListener('click', (event) => {
     if (event.target.getAttribute('key') === 'nextQ') {
         if (Q_incrementer < data.results.length - 1) {
             Q_incrementer++;
             loadQ(data);
-
         }
 
     } else if (event.target.getAttribute('key') === 'lastQ') {
@@ -183,15 +177,46 @@ document.getElementById('sendName').addEventListener("click",(Event)=>{
 // this function is made to calc handel the user ans
 document.addEventListener("click",(Event)=>{
     if(Event.target.id == "Quiz_Ans"){
+        document.querySelectorAll('#Quiz_Ans').forEach(ele=>{
+            ele.style.color = '#1d1724'
+            ele.style.background = 'none'
+        })
+        Event.target.style.color = '#e8e8e8'
+        Event.target.style.background = '#9B7EBD'
         handelUserANS(Event.target.textContent)
-        //console.log()
     }
 });
 
 document.addEventListener("click",(Event)=>{
     if(Event.target.getAttribute('key') == 'lastQ'){
-        console.log(userInfo)
-        console.log(exam_ans)
+        HandelUserScore();
+        HandelresultPage();
     }
-})
+});
+
+
+function HandelUserScore(){
+    let score = 0;
+    for(let i = 0 ; i< Q.amount;i++){
+        if(userInfo.user_ans[`${i}`] == exam_ans[i].correct_answer){
+            score++;
+        }
+    }
+    userInfo.score = score;
+};
+ 
+function HandelresultPage(){
+    document.querySelector(".selection-list").innerHTML = ResultPage();
+}
+
+function ResultPage(){
+    let condetion = userInfo.score < Q.amount/2 ? "Good luck":"Congratulations";
+
+    return `<div class="result-info-page">
+    <h1>${condetion} ${userInfo.name}</h1>
+    <p>your score is:${userInfo.score}</p>
+    </div>`
+}
+
+
 
