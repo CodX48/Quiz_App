@@ -80,10 +80,6 @@ function handelcategory() {
                 Q = { ...Q, category: categoryKey }; 
             }
 
-            numofQ().then(maxQuestions => {
-                console.log(`Maximum retrievable questions: ${maxQuestions}`);
-            });
-
             event.preventDefault(); // Prevent default behavior (e.g., navigating)
         });
     });
@@ -115,12 +111,26 @@ function handelQtype(){
             });
             event.target.style.background = '#9B7EBD';
         const typeKey = ele.getAttribute('key');
+
         if (typeKey) {
             Q = { ...Q, type: typeKey }; 
              event.preventDefault();
         }
-        })
-    })
+        let Q_mount;
+    console.log("i came")
+    numofQ().then(maxQuestions =>{
+        Q_mount = maxQuestions;
+        console.log(Q_mount)
+        let Q_mountEle = ''
+        for(let x  = 5 ; x < Q_mount ; x+=5){
+            Q_mountEle += `<p id="${x}">${x}</p>`
+        }
+        document.querySelector('.Q-mount').innerHTML = Q_mountEle;
+    });
+    
+    });
+});
+    
 }
 handelQtype();
 
