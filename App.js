@@ -47,7 +47,7 @@ buttons.forEach(button => {
     if(button.getAttribute('key') == 'start'){
         setTimeout(async ()=>{
             data = await getQ(Q);
-            console.log(data)
+            //console.log(data)
             handelANS();
             loadQ(data);
         } ,1000);
@@ -79,11 +79,11 @@ function handelcategory() {
             if (categoryKey) {
                 Q = { ...Q, category: categoryKey }; 
             }
-
             event.preventDefault(); // Prevent default behavior (e.g., navigating)
         });
     });
 }
+
 handelcategory();
 
 function handeldiff(){
@@ -101,38 +101,85 @@ document.querySelectorAll('.Q-diff-cont p').forEach(ele =>{
     })
 })
 }
-handeldiff();
 
-function handelQtype(){
-    document.querySelectorAll('.Q-type-cont p').forEach(ele =>{
-        ele.addEventListener('click',(event)=>{
-            document.querySelectorAll('.Q-type-cont p').forEach(p => {
+handeldiff();
+function handelQtype() {
+    // Attach click listeners to all Q-type-cont p elements
+    document.querySelectorAll('.Q-type-cont p').forEach((ele) => {
+      ele.addEventListener('click', (event) => {
+        // Reset background for all Q-type-cont p elements
+        document.querySelectorAll('.Q-type-cont p').forEach((p) => {
+          p.style.background = '#45404b';
+        });
+  
+        // Highlight the clicked element
+        event.target.style.background = '#9B7EBD';
+  
+        const typeKey = ele.getAttribute('key');
+        if (typeKey) {
+          Q = { ...Q, type: typeKey }; // Update Q object
+          event.preventDefault();
+        }
+  
+        // Show the loading alert
+        function showLoadingAlert() {
+          document.getElementById('loadingAlert').style.display = 'flex';
+        }
+  
+        // Hide the loading alert
+        function hideLoadingAlert() {
+          document.getElementById('loadingAlert').style.display = 'none';
+        }
+  
+        let Q_mount; // To store the number of questions
+  
+        // Show loading indicator before fetching
+        showLoadingAlert();
+  
+        // Fetch maxQuestions and dynamically populate .Q-mount
+        numofQ()
+          .then((maxQuestions) => {
+            Q_mount = maxQuestions;
+  
+            // Dynamically create Q-mount elements
+            let Q_mountEle = '';
+            for (let x = 5; x <= Q_mount; x += 5) {
+              Q_mountEle += `<p id="${x}">${x}</p>`;
+            }
+  
+            // Add generated elements to .Q-mount
+            document.querySelector('.Q-mount').innerHTML = Q_mountEle;
+  
+            // Reattach event listeners for the new elements
+            handelQmount();
+          })
+          .finally(() => {
+            // Always hide the loading alert
+            hideLoadingAlert();
+          });
+      });
+    });
+  }
+  
+handelQtype();
+
+function handelQmount(){
+    document.querySelectorAll('.Q-mount p').forEach(ele =>{
+        ele.addEventListener("click",(Event)=>{
+            document.querySelectorAll('.Q-mount p').forEach(p => {
                 p.style.background = '#45404b';
             });
             event.target.style.background = '#9B7EBD';
-        const typeKey = ele.getAttribute('key');
 
-        if (typeKey) {
-            Q = { ...Q, type: typeKey }; 
-             event.preventDefault();
-        }
-        let Q_mount;
-    console.log("i came")
-    numofQ().then(maxQuestions =>{
-        Q_mount = maxQuestions;
-        console.log(Q_mount)
-        let Q_mountEle = ''
-        for(let x  = 5 ; x < Q_mount ; x+=5){
-            Q_mountEle += `<p id="${x}">${x}</p>`
-        }
-        document.querySelector('.Q-mount').innerHTML = Q_mountEle;
-    });
-    
-    });
-});
-    
+            const QnumId = ele.id;
+            if(QnumId){
+                Q = {...Q,amount:QnumId}
+                Event.preventDefault();
+                //console.log(Q)
+            }
+        })
+    })
 }
-handelQtype();
 
 //it gonna take the arr and go over it till the end of it, our goal is to every time i click next i need to increment the index by 1 so every time the index is been changed, it is for changing the data 
 // there is also a event listener to know the choosen and compare it to the correct answer so we calc the exam result 

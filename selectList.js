@@ -31,13 +31,15 @@ const optionsArray = [
 
   function page1(){
     return `<div id="selection" class="page1">
-    <h1>some messages</h1>
+    <div class="welcome-mes"><h1>Welcome to the Ultimate Quiz Challenge! </h1>
+    <p>Ready to test your knowledge and have some fun?
+This quiz will take you on a journey through fascinating topics and tricky questions.</p>
+    </div>
     <form>
-    <input type="text" value="" placeholder="Enter your name..." />
-    <button>Next</button>
+    <input id="namehandel" type="text" value="" placeholder="Enter your name..." />
+    <button id="sendName">Next</button>
     </form>
-    </div>`
-     
+    </div>`  
   }
   
   function page2(){
@@ -55,12 +57,14 @@ const optionsArray = [
 
     <div class="Q-diff-cont"><p key="easy">Easy</p> <p key="medium">Medium</p> <p key="hard">Hard</p></div>
 
-    <div class="Q-num-cont"> 
-    <h3>How Many Q Do You Need?</h3> 
-    <input type="text" name="trivia_amount" id="trivia_amount" class="form-control" value="10" />
-    </div>
 
     <div class="Q-type-cont"> <p key="multiple">MCQ</p> <p key="boolean">True / False</p> </div>
+
+    <div class="Q-num-cont">
+    <h3>How Many Q Do You Need?</h3> 
+    <div class="Q-mount"></div>
+    </div>
+
     <button key="start">Start</button>
     
     </div>`
