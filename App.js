@@ -47,13 +47,27 @@ buttons.forEach(button => {
     if(button.getAttribute('key') == 'start'){
         setTimeout(async ()=>{
             data = await getQ(Q);
-            //console.log(data)
             handelANS();
             loadQ(data);
         } ,1000);
 
         
-    }else{
+    }else if(button.id == 'sendName'){
+        console.log("lol")
+        if(document.getElementById('namehandel').value == '' || document.getElementById('namehandel').value == ' '){
+            let ele = document.createElement('p')
+            ele.style.fontSize = "15px"
+            ele.style.fontWeight = "600"
+            ele.style.color = "red"
+            ele.textContent = 'You must add a name !'
+            document.getElementById('namehandel').after(ele);
+        }
+        else{
+        sec = (sec + 1);
+        updateCarousel(sec);
+    }
+    }
+    else{
     sec = (sec + 1);
     updateCarousel(sec);
     }
@@ -199,8 +213,9 @@ function loadQ(Data) {
 }
 
 function renderQuizSection(Question) {
-    let answersHTML = `<p id="Quiz_Ans">${Question.correct_answer}</p>`;
-    Question.incorrect_answers.forEach((ele) => {
+    const answers = [Question.correct_answer,...Question.incorrect_answers].sort(()=> Math.round() - 0.5);
+    let answersHTML = ''
+    answers.forEach((ele) => {
         answersHTML += `<p id="Quiz_Ans" key="">${ele}</p>`;
     });
 
@@ -227,6 +242,8 @@ document.querySelector(".selection-list").addEventListener('click', (event) => {
         console.log("End of quiz!");
     }
 });
+
+//here i will handle the userName input 
 
 document.getElementById('sendName').addEventListener("click",(Event)=>{
  userInfo.name = document.getElementById('namehandel').value;
