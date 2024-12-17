@@ -1,0 +1,290 @@
+{
+  "9": {
+    "multiple": {
+      "hard": 49,
+      "medium": 49,
+      "easy": 49
+    },
+    "boolean": {
+      "hard": 6,
+      "medium": 30,
+      "easy": 31
+    }
+  },
+  "10": {
+    "multiple": {
+      "hard": 25,
+      "medium": 40,
+      "easy": 24
+    },
+    "boolean": {
+      "hard": 2,
+      "medium": 1,
+      "easy": 7
+    }
+  },
+  "11": {
+    "multiple": {
+      "hard": 40,
+      "medium": 49,
+      "easy": 49
+    },
+    "boolean": {
+      "hard": 3,
+      "medium": 7,
+      "easy": 20
+    }
+  },
+  "12": {
+    "multiple": {
+      "hard": 49,
+      "medium": 49,
+      "easy": 49
+    },
+    "boolean": {
+      "hard": 5,
+      "medium": 21,
+      "easy": 17
+    }
+  },
+  "13": {
+    "multiple": {
+      "hard": 9,
+      "medium": 13,
+      "easy": 7
+    },
+    "boolean": {
+      "hard": 1,
+      "medium": 1,
+      "easy": 2
+    }
+  },
+  "14": {
+    "multiple": {
+      "hard": 28,
+      "medium": 49,
+      "easy": 49
+    },
+    "boolean": {
+      "hard": 1,
+      "medium": 11,
+      "easy": 6
+    }
+  },
+  "15": {
+    "multiple": {
+      "hard": 49,
+      "medium": 49,
+      "easy": 49
+    },
+    "boolean": {
+      "hard": 16,
+      "medium": 45,
+      "easy": 49
+    }
+  },
+  "16": {
+    "multiple": {
+      "hard": 24,
+      "medium": 13,
+      "easy": 14
+    },
+    "boolean": {
+      "hard": 1,
+      "medium": 2,
+      "easy": 5
+    }
+  },
+  "17": {
+    "multiple": {
+      "hard": 49,
+      "medium": 49,
+      "easy": 49
+    },
+    "boolean": {
+      "hard": 3,
+      "medium": 20,
+      "easy": 11
+    }
+  },
+  "18": {
+    "multiple": {
+      "hard": 34,
+      "medium": 49,
+      "easy": 34
+    },
+    "boolean": {
+      "hard": 3,
+      "medium": 18,
+      "easy": 14
+    }
+  },
+  "19": {
+    "multiple": {
+      "hard": 13,
+      "medium": 16,
+      "easy": 8
+    },
+    "boolean": {
+      "hard": 4,
+      "medium": 8,
+      "easy": 6
+    }
+  },
+  "20": {
+    "multiple": {
+      "hard": 11,
+      "medium": 22,
+      "easy": 15
+    },
+    "boolean": {
+      "hard": 2,
+      "medium": 4,
+      "easy": 4
+    }
+  },
+  "21": {
+    "multiple": {
+      "hard": 20,
+      "medium": 49,
+      "easy": 43
+    },
+    "boolean": {
+      "hard": 1,
+      "medium": 9,
+      "easy": 5
+    }
+  },
+  "22": {
+    "multiple": {
+      "hard": 49,
+      "medium": 49,
+      "easy": 49
+    },
+    "boolean": {
+      "hard": 3,
+      "medium": 20,
+      "easy": 19
+    }
+  },
+  "23": {
+    "multiple": {
+      "hard": 49,
+      "medium": 49,
+      "easy": 49
+    },
+    "boolean": {
+      "hard": 8,
+      "medium": 20,
+      "easy": 15
+    }
+  },
+  "24": {
+    "multiple": {
+      "hard": 12,
+      "medium": 21,
+      "easy": 8
+    },
+    "boolean": {
+      "hard": 3,
+      "medium": 5,
+      "easy": 10
+    }
+  },
+  "25": {
+    "multiple": {
+      "hard": 8,
+      "medium": 8,
+      "easy": 11
+    },
+    "boolean": {
+      "hard": 1,
+      "medium": 3,
+      "easy": 2
+    }
+  },
+  "26": {
+    "multiple": {
+      "hard": 7,
+      "medium": 30,
+      "easy": 11
+    },
+    "boolean": {
+      "hard": 1,
+      "medium": 1,
+      "easy": 2
+    }
+  },
+  "27": {
+    "multiple": {
+      "hard": 18,
+      "medium": 22,
+      "easy": 13
+    },
+    "boolean": {
+      "hard": 1,
+      "medium": 8,
+      "easy": 15
+    }
+  },
+  "28": {
+    "multiple": {
+      "hard": 16,
+      "medium": 23,
+      "easy": 19
+    },
+    "boolean": {
+      "hard": 2,
+      "medium": 9,
+      "easy": 2
+    }
+  },
+  "29": {
+    "multiple": {
+      "hard": 18,
+      "medium": 33,
+      "easy": 13
+    },
+    "boolean": {
+      "hard": 1,
+      "medium": 1,
+      "easy": 2
+    }
+  },
+  "30": {
+    "multiple": {
+      "hard": 5,
+      "medium": 9,
+      "easy": 12
+    },
+    "boolean": {
+      "hard": 1,
+      "medium": 1,
+      "easy": 2
+    }
+  },
+  "31": {
+    "multiple": {
+      "hard": 39,
+      "medium": 49,
+      "easy": 45
+    },
+    "boolean": {
+      "hard": 7,
+      "medium": 5,
+      "easy": 13
+    }
+  },
+  "32": {
+    "multiple": {
+      "hard": 17,
+      "medium": 34,
+      "easy": 28
+    },
+    "boolean": {
+      "hard": 1,
+      "medium": 7,
+      "easy": 3
+    }
+  }
+}
