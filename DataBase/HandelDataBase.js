@@ -1,4 +1,3 @@
-const fs = require('fs');
 
 const optionsArray = [
     { text: "Any Category", id: "" },
@@ -53,7 +52,7 @@ function writeData(DatabaseOJ){
         });
 }
   
-  console.log(Data);
+  //console.log(Data);
   
   async function handleData() {
     for (const ele of optionsArray) {
@@ -100,7 +99,6 @@ function writeData(DatabaseOJ){
       await delay(5000);
       try {
         let data = await fetchData(testQ);
-        //console.log(data.response_code)
         if (data.response_code === 0) {
           low = mid; 
         } else {
@@ -114,6 +112,27 @@ function writeData(DatabaseOJ){
     return low;
   }
   
-  handleData();
+  //handleData();
+
+// Reading the JSON file asynchronously
+async function sendmaxnum(Q) {
+  try {
+    // Wait for the fetch to complete and parse the JSON response
+    const response = await fetch('DataBase/data.json');
+    
+    if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.statusText}`);
+    }
+
+    const data = await response.json();  // Parse the JSON content
+
+    // Access the specific data based on Q's properties
+    const result = data[`${Q.category}`][`${Q.type}`][`${Q.difficulty}`];
+    return result;
+  } catch (error) {
+    console.error('Error reading JSON:', error);
+  }
+}
+export {sendmaxnum}
 
   

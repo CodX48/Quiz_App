@@ -1,3 +1,4 @@
+import { sendmaxnum } from "./DataBase/HandelDataBase.js";
 //https://opentdb.com/api.php?amount=10&category=27
 import {page1,page2,page3} from "./selectList.js";
 //randring
@@ -153,6 +154,7 @@ function handelQtype() {
         // Fetch maxQuestions and dynamically populate .Q-mount
         numofQ()
           .then((maxQuestions) => {
+            console.log(maxQuestions);
             Q_mount = maxQuestions;
   
             // Dynamically create Q-mount elements
@@ -303,30 +305,9 @@ function ResultPage(){
 
 //here i am tring to add a method that gives me only the available number of questions using binary search algorithem
 //Data.response_code == '0' true
-async function numofQ() { // this function gonna be the last function before start the exam so the user can only choose the available amount of Q
-    let low = 1;
-    let high = 50;
-    let mid;
 
-    while (low < high - 1) {
-        mid = Math.floor((low + high) / 2);
-        let testQ = { ...Q, amount: mid };
+async function numofQ() { 
         await new Promise(resolve => setTimeout(resolve, 5000));
-        try {
-            let data = await getQ(testQ);
-            if (data.response_code === 0) {
-                low = mid; 
-            } else {
-                high = mid;
-            }
-        } catch (error) {
-            console.error(`Error querying API with mid ${mid}:`, error); // Catch network or API errors
-            throw new Error("Failed to query the API.");
-        }
-    }
-    return low;
+        return sendmaxnum(Q);
 }
-
-
-
 
